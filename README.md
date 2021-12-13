@@ -147,9 +147,9 @@ See [variables.tf] and [examples/] for details and use-cases.
 
     ```hcl
     secondary_ip_range {
-        range_name = "tf-test-secondary-range-update1"
-        ip_cidr_range        = "192.168.10.0/24"
-      }
+      range_name = "tf-test-secondary-range-update1"
+      ip_cidr_range        = "192.168.10.0/24"
+    }
     ```
 
     Each object in the list accepts the following attributes:
@@ -170,12 +170,12 @@ See [variables.tf] and [examples/] for details and use-cases.
 
     ```hcl
     log_config {
-        aggregation_interval = "INTERVAL_10_MIN"
-        flow_sampling        = 0.5
-        metadata             = "INCLUDE_ALL_METADATA"
-        metadata_fields      = "CUSTOM_METADATA"
-        filter_expr          = true
-      }
+      aggregation_interval = "INTERVAL_10_MIN"
+      flow_sampling        = 0.5
+      metadata             = "INCLUDE_ALL_METADATA"
+      metadata_fields      = "CUSTOM_METADATA"
+      filter_expr          = true
+    }
     ```
 
     The object accepts the following attributes:
