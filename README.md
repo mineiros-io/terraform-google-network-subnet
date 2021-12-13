@@ -326,7 +326,7 @@ Copyright &copy; 2020-2022 [Mineiros GmbH][homepage]
 
 <!-- References -->
 
-[homepage]: https : //mineiros.io/?ref=terraform-google-network-subnet
+[homepage]: https://mineiros.io/?ref=terraform-google-network-subnet
 [hello@mineiros.io]: mailto:hello@mineiros.io
 [badge-build]: https://github.com/mineiros-io/terraform-google-network-subnet/workflows/Tests/badge.svg
 [badge-semver]: https://img.shields.io/github/v/tag/mineiros-io/terraform-module-template.svg?label=latest&sort=semver

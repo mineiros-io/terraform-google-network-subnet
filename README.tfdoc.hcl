@@ -443,7 +443,7 @@ section {
 
 references {
   ref "homepage"{
-    value = "https : //mineiros.io/?ref=terraform-google-network-subnet"
+    value = "https://mineiros.io/?ref=terraform-google-network-subnet"
   }
   ref "hello@mineiros.io" {
     value = "mailto:hello@mineiros.io"
