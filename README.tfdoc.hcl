@@ -193,9 +193,9 @@ section {
             END
             readme_example = <<-END
               secondary_ip_range {
-                  range_name = "tf-test-secondary-range-update1"
-                  ip_cidr_range        = "192.168.10.0/24"
-                }
+                range_name = "tf-test-secondary-range-update1"
+                ip_cidr_range        = "192.168.10.0/24"
+              }
             END
 
             attribute "range_name" {
@@ -223,12 +223,12 @@ section {
             END
             readme_example = <<-END
               log_config {
-                  aggregation_interval = "INTERVAL_10_MIN"
-                  flow_sampling        = 0.5
-                  metadata             = "INCLUDE_ALL_METADATA"
-                  metadata_fields      = "CUSTOM_METADATA"
-                  filter_expr          = true
-                }
+                aggregation_interval = "INTERVAL_10_MIN"
+                flow_sampling        = 0.5
+                metadata             = "INCLUDE_ALL_METADATA"
+                metadata_fields      = "CUSTOM_METADATA"
+                filter_expr          = true
+              }
             END
 
             attribute "aggregation_interval" {
