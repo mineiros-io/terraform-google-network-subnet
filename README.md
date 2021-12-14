@@ -1,7 +1,7 @@
-[<img src="https://raw.githubusercontent.com/mineiros-io/brand/3bffd30e8bdbbde32c143e2650b2faa55f1df3ea/mineiros-primary-logo.svg" width="400"/>](https://mineiros.io/?ref=terraform-module-template)
+[<img src="https://raw.githubusercontent.com/mineiros-io/brand/3bffd30e8bdbbde32c143e2650b2faa55f1df3ea/mineiros-primary-logo.svg" width="400"/>](https://mineiros.io/?ref=terraform-google-network-subnet)
 
-[![Build Status](https://github.com/mineiros-io/terraform-module-template/workflows/Tests/badge.svg)](https://github.com/mineiros-io/terraform-module-template/actions)
-[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/mineiros-io/terraform-module-template.svg?label=latest&sort=semver)](https://github.com/mineiros-io/terraform-module-template/releases)
+[![Build Status](https://github.com/mineiros-io/terraform-google-network-subnet/workflows/Tests/badge.svg)](https://github.com/mineiros-io/terraform-google-network-subnet/actions)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/mineiros-io/terraform-google-network-subnet.svg?label=latest&sort=semver)](https://github.com/mineiros-io/terraform-google-network-subnet/releases)
 [![Terraform Version](https://img.shields.io/badge/Terraform-1.x-623CE4.svg?logo=terraform)](https://github.com/hashicorp/terraform/releases)
 [![Google Provider Version](https://img.shields.io/badge/google-4-1A73E8.svg?logo=terraform)](https://github.com/terraform-providers/terraform-provider-google/releases)
 [![Join Slack](https://img.shields.io/badge/slack-@mineiros--community-f32752.svg?logo=slack)](https://mineiros.io/slack)
@@ -119,7 +119,7 @@ See [variables.tf] and [examples/] for details and use-cases.
   }]
   ```
 
-  Each object in the list accepts the following attributes:
+  The object accepts the following attributes:
 
   - [**`name`**](#attr-name-1): *(**Required** `string`)*<a name="attr-name-1"></a>
 
@@ -152,7 +152,7 @@ See [variables.tf] and [examples/] for details and use-cases.
     }
     ```
 
-    Each object in the list accepts the following attributes:
+    The object accepts the following attributes:
 
     - [**`range_name`**](#attr-range_name-2): *(**Required** `string`)*<a name="attr-range_name-2"></a>
 
@@ -329,7 +329,7 @@ Copyright &copy; 2020-2022 [Mineiros GmbH][homepage]
 [homepage]: https://mineiros.io/?ref=terraform-google-network-subnet
 [hello@mineiros.io]: mailto:hello@mineiros.io
 [badge-build]: https://github.com/mineiros-io/terraform-google-network-subnet/workflows/Tests/badge.svg
-[badge-semver]: https://img.shields.io/github/v/tag/mineiros-io/terraform-module-template.svg?label=latest&sort=semver
+[badge-semver]: https://img.shields.io/github/v/tag/mineiros-io/terraform-google-network-subnet.svg?label=latest&sort=semver
 [badge-license]: https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg
 [badge-terraform]: https://img.shields.io/badge/Terraform-1.x-623CE4.svg?logo=terraform
 [badge-slack]: https://img.shields.io/badge/slack-@mineiros--community-f32752.svg?logo=slack

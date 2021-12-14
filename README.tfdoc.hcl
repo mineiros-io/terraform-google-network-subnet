@@ -1,16 +1,16 @@
 header {
   image = "https://raw.githubusercontent.com/mineiros-io/brand/3bffd30e8bdbbde32c143e2650b2faa55f1df3ea/mineiros-primary-logo.svg"
-  url   = "https://mineiros.io/?ref=terraform-module-template"
+  url   = "https://mineiros.io/?ref=terraform-google-network-subnet"
 
   badge "build" {
-    image = "https://github.com/mineiros-io/terraform-module-template/workflows/Tests/badge.svg"
-    url   = "https://github.com/mineiros-io/terraform-module-template/actions"
+    image = "https://github.com/mineiros-io/terraform-google-network-subnet/workflows/Tests/badge.svg"
+    url   = "https://github.com/mineiros-io/terraform-google-network-subnet/actions"
     text  = "Build Status"
   }
 
   badge "semver" {
-    image = "https://img.shields.io/github/v/tag/mineiros-io/terraform-module-template.svg?label=latest&sort=semver"
-    url   = "https://github.com/mineiros-io/terraform-module-template/releases"
+    image = "https://img.shields.io/github/v/tag/mineiros-io/terraform-google-network-subnet.svg?label=latest&sort=semver"
+    url   = "https://github.com/mineiros-io/terraform-google-network-subnet/releases"
     text  = "GitHub tag (latest SemVer)"
   }
 
@@ -98,7 +98,7 @@ section {
         }
 
         variable "module_depends_on" {
-          type           = list(any)
+          type           = any
           readme_type    = "list(dependencies)"
           description    = <<-END
             A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
@@ -139,7 +139,7 @@ section {
         }
 
         variable "subnets" {
-          type           = list(any)
+          type           = any
           readme_type    = "list(subnets)"
           description    = <<-END
             A list of subnets to be created with the VPC.
@@ -186,7 +186,7 @@ section {
           }
 
           attribute "secondary_ip_ranges" {
-            type           = list(any)
+            type           = any
             readme_type    = "list(secondary_ip_range)"
             description    = <<-END
               An array of configurations for secondary IP ranges for VM instances contained in this subnetwork. The primary IP of such VM must belong to the primary ipCidrRange of the subnetwork. The alias IPs may belong to either primary or secondary ranges.
@@ -452,7 +452,7 @@ references {
     value = "https://github.com/mineiros-io/terraform-google-network-subnet/workflows/Tests/badge.svg"
   }
   ref "badge-semver" {
-    value = "https://img.shields.io/github/v/tag/mineiros-io/terraform-module-template.svg?label=latest&sort=semver"
+    value = "https://img.shields.io/github/v/tag/mineiros-io/terraform-google-network-subnet.svg?label=latest&sort=semver"
   }
   ref "badge-license" {
     value = "https://img.shields.io/badge/license-Apache%202.0-brightgreen.svg"
