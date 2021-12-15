@@ -11,7 +11,7 @@
 A [Terraform](https://www.terraform.io) module to create a [Google Network Subnet](https://cloud.google.com/vpc/docs/vpc#vpc_networks_and_subnets) on [Google Cloud Services (GCP)](https://cloud.google.com/).
 
 **_This module supports Terraform version 1
-and is compatible with the Terraform Google Provider version 3._**
+and is compatible with the Terraform Google Provider version 4._**
 
 This module is part of our Infrastructure as Code (IaC) framework
 that enables our users and customers to easily deploy and manage reusable,
@@ -24,11 +24,10 @@ secure, and production-grade cloud infrastructure.
   - [Top-level Arguments](#top-level-arguments)
     - [Module Configuration](#module-configuration)
     - [Main Resource Configuration](#main-resource-configuration)
-    - [Extended Resource Configuration](#extended-resource-configuration)
-- [Module Attributes Reference](#module-attributes-reference)
+- [Module Outputs](#module-outputs)
 - [External Documentation](#external-documentation)
-  - [Google Documentation :](#google-documentation-)
-  - [Terraform Google Provider Documentation :](#terraform-google-provider-documentation-)
+  - [Google Documentation](#google-documentation)
+  - [Terraform Google Provider Documentation](#terraform-google-provider-documentation)
 - [Module Versioning](#module-versioning)
   - [Backwards compatibility in ` 0.0.z ` and ` 0.y.z ` version](#backwards-compatibility-in--00z--and--0yz--version)
 - [About Mineiros](#about-mineiros)
@@ -248,9 +247,7 @@ See [variables.tf] and [examples/] for details and use-cases.
 
     Default is `"true"`.
 
-#### Extended Resource Configuration
-
-## Module Attributes Reference
+## Module Outputs
 
 The following attributes are exported in the outputs of the module:
 
@@ -264,12 +261,12 @@ The following attributes are exported in the outputs of the module:
 
 ## External Documentation
 
-### Google Documentation :
+### Google Documentation
 
 - Configuring Private Google Access: <https://cloud.google.com/vpc/docs/configure-private-google-access>
 - Using VPC networks: <https://cloud.google.com/vpc/docs/using-vpc>
 
-### Terraform Google Provider Documentation :
+### Terraform Google Provider Documentation
 
 - <https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork#flow_sampling>
 

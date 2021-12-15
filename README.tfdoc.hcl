@@ -40,7 +40,7 @@ section {
     A [Terraform](https://www.terraform.io) module to create a [Google Network Subnet](https://cloud.google.com/vpc/docs/vpc#vpc_networks_and_subnets) on [Google Cloud Services (GCP)](https://cloud.google.com/).
 
     **_This module supports Terraform version 1
-    and is compatible with the Terraform Google Provider version 3._**
+    and is compatible with the Terraform Google Provider version 4._**
 
     This module is part of our Infrastructure as Code (IaC) framework
     that enables our users and customers to easily deploy and manage reusable,
@@ -328,15 +328,11 @@ section {
           }
         }
       }
-
-      section {
-        title = "Extended Resource Configuration"
-      }
     }
   }
 
   section {
-    title   = "Module Attributes Reference"
+    title   = "Module Outputs"
     content = <<-END
       The following attributes are exported in the outputs of the module:
 
@@ -354,7 +350,7 @@ section {
     title = "External Documentation"
 
     section {
-      title   = "Google Documentation :"
+      title   = "Google Documentation"
       content = <<-END
         - Configuring Private Google Access: <https://cloud.google.com/vpc/docs/configure-private-google-access>
         - Using VPC networks: <https://cloud.google.com/vpc/docs/using-vpc>
@@ -362,7 +358,7 @@ section {
     }
 
     section {
-      title   = "Terraform Google Provider Documentation :"
+      title   = "Terraform Google Provider Documentation"
       content = <<-END
         - <https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork#flow_sampling>
       END
