@@ -264,12 +264,12 @@ The following attributes are exported in the outputs of the module:
 
 ## External Documentation
 
-### Google Documentation :
+### Google Documentation
 
 - Configuring Private Google Access: <https://cloud.google.com/vpc/docs/configure-private-google-access>
 - Using VPC networks: <https://cloud.google.com/vpc/docs/using-vpc>
 
-### Terraform Google Provider Documentation :
+### Terraform Google Provider Documentation
 
 - <https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork#flow_sampling>
 
