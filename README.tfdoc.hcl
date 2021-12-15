@@ -354,7 +354,7 @@ section {
     title = "External Documentation"
 
     section {
-      title   = "Google Documentation :"
+      title   = "Google Documentation"
       content = <<-END
         - Configuring Private Google Access: <https://cloud.google.com/vpc/docs/configure-private-google-access>
         - Using VPC networks: <https://cloud.google.com/vpc/docs/using-vpc>
@@ -362,7 +362,7 @@ section {
     }
 
     section {
-      title   = "Terraform Google Provider Documentation :"
+      title   = "Terraform Google Provider Documentation"
       content = <<-END
         - <https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_subnetwork#flow_sampling>
       END
