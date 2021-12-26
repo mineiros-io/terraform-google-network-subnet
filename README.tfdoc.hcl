@@ -177,14 +177,6 @@ section {
           END
         }
 
-        variable "mtu" {
-          type        = string
-          default     = "1460"
-          description = <<-END
-            Maximum Transmission Unit in bytes. The minimum value for this field is 1460 and the maximum value is 1500 bytes.
-          END
-        }
-
         variable "subnets" {
           type           = any
           readme_type    = "list(subnets)"

@@ -19,17 +19,6 @@ variable "project" {
   default     = null
 }
 
-variable "mtu" {
-  description = "(Optional) Maximum Transmission Unit in bytes. The minimum value for this field is 1460 and the maximum value is 1500 bytes. Default is '1460'."
-  type        = string
-  default     = 1460
-
-  validation {
-    condition     = var.mtu >= 1460 && var.mtu <= 1500
-    error_message = "The mtu expects a value between '1460' and '1500'."
-  }
-}
-
 variable "subnets" {
   # TODO implement validation
   description = "(Optional) A list of subnets to be created with the VPC. Default is 'null'."

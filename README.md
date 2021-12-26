@@ -136,12 +136,6 @@ See [variables.tf] and [examples/] for details and use-cases.
 
   The VPC network the subnets belong to.
 
-- [**`mtu`**](#var-mtu): *(Optional `string`)*<a name="var-mtu"></a>
-
-  Maximum Transmission Unit in bytes. The minimum value for this field is 1460 and the maximum value is 1500 bytes.
-
-  Default is `"1460"`.
-
 - [**`subnets`**](#var-subnets): *(Optional `list(subnets)`)*<a name="var-subnets"></a>
 
   A list of subnets to be created with the VPC.
