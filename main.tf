@@ -10,7 +10,7 @@ locals {
 }
 
 resource "google_compute_subnetwork" "subnetwork" {
-  for_each = var.module_enabled ? local.subnets : {}
+  for_each = var.module_enabled ? local.subnets : tomap({})
 
   project     = var.project
   network     = var.network
