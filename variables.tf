@@ -3,11 +3,6 @@
 # These variables must be set when using this module.
 # ---------------------------------------------------------------------------------------------------------------------
 
-variable "project" {
-  description = "(Required) The ID of the project in which the resources belong."
-  type        = string
-}
-
 variable "network" {
   description = "(Required) The VPC network the subnets belong to."
   type        = string
@@ -17,6 +12,12 @@ variable "network" {
 # OPTIONAL VARIABLES
 # These variables have defaults, but may be overridden.
 # ---------------------------------------------------------------------------------------------------------------------
+
+variable "project" {
+  type        = string
+  description = "(Optional) The ID of the project in which the resource belongs. If it is not set, the provider project is used."
+  default     = null
+}
 
 variable "mtu" {
   description = "(Optional) Maximum Transmission Unit in bytes. The minimum value for this field is 1460 and the maximum value is 1500 bytes. Default is '1460'."
