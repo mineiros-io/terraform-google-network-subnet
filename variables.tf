@@ -8,20 +8,9 @@ variable "network" {
   type        = string
 }
 
-# ---------------------------------------------------------------------------------------------------------------------
-# OPTIONAL VARIABLES
-# These variables have defaults, but may be overridden.
-# ---------------------------------------------------------------------------------------------------------------------
-
-variable "project" {
-  type        = string
-  description = "(Optional) The ID of the project in which the resource belongs. If it is not set, the provider project is used."
-  default     = null
-}
-
 variable "subnets" {
   # TODO: implement validation
-  description = "(Optional) A list of subnets to be created with the VPC. Default is 'null'."
+  description = "(Required) A list of subnets to be created with the VPC."
   type        = any
   # type = list(object({
   #   project                  = optional(string)
@@ -42,7 +31,6 @@ variable "subnets" {
   #     filter_expr          = optional(string)
   #   }))
   # }))
-  default = []
 
   # Example
   #
@@ -70,6 +58,17 @@ variable "subnets" {
   #     ip_cidr_range            = "10.20.0.0/16"
   #   }
   # ]
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
+# OPTIONAL VARIABLES
+# These variables have defaults, but may be overridden.
+# ---------------------------------------------------------------------------------------------------------------------
+
+variable "project" {
+  type        = string
+  description = "(Optional) The ID of the project in which the resources belong. If it is not set, the provider project is used."
+  default     = null
 }
 
 variable "default_log_config" {

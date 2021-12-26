@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Set `var.project` to be optional
+- Set `var.subnets` to be required
 
 ## [0.0.2]
 
