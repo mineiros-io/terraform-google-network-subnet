@@ -20,10 +20,29 @@ variable "project" {
 }
 
 variable "subnets" {
-  # TODO implement validation
+  # TODO: implement validation
   description = "(Optional) A list of subnets to be created with the VPC. Default is 'null'."
   type        = any
-  default     = null
+  # type = list(object({
+  #   project                  = optional(string)
+  #   name                     = string
+  #   description              = optional(string)
+  #   region                   = string
+  #   private_ip_google_access = optional(bool)
+  #   ip_cidr_range            = string
+  #   secondary_ip_range = optional(list(object({
+  #     range_name    = string
+  #     ip_cidr_range = string
+  #   })))
+  #   log_config = optional(object({
+  #     aggregation_interval = optional(string)
+  #     flow_sampling        = optional(number)
+  #     metadata             = optional(string)
+  #     metadata_fields      = optional(list(string))
+  #     filter_expr          = optional(string)
+  #   }))
+  # }))
+  default = []
 
   # Example
   #
@@ -46,7 +65,6 @@ variable "subnets" {
   #     }
   #   },
   #   {
-  #     class                    = "public",
   #     region                   = "europe-west1",
   #     private_ip_google_access = false,
   #     ip_cidr_range            = "10.20.0.0/16"
