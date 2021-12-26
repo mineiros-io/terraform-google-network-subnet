@@ -332,11 +332,6 @@ section {
         variable "default_log_config" {
           type           = any
           readme_type    = "object(default_log_config)"
-          default        = { 
-            aggregation_interval = "INTERVAL_10_MIN" 
-            flow_sampling        = 0.5 
-            metadata             = "INCLUDE_ALL_METADATA" 
-          }
           description    = <<-END
             The default logging options for the subnetwork flow logs. Setting this value to `null` will disable them. See https://www.terraform.io/docs/providers/google/r/compute_subnetwork.html for more information and examples.
           END
@@ -350,7 +345,6 @@ section {
 
           attribute "aggregation_interval" {
             type        = string
-            default     = "INTERVAL_10_MIN"
             description = <<-END
               Can only be specified if VPC flow logging for this subnetwork is enabled. Toggles the aggregation interval for collecting flow logs. Increasing the interval time will reduce the amount of generated flow logs for long lasting connections. Possible values are `INTERVAL_5_SEC`, `INTERVAL_30_SEC`, `INTERVAL_1_MIN`, `INTERVAL_5_MIN`, `INTERVAL_10_MIN`, and `INTERVAL_15_MIN`.
             END
@@ -358,7 +352,6 @@ section {
 
           attribute "flow_sampling" {
             type        = number
-            default     = 0.5
             description = <<-END
               Can only be specified if VPC flow logging for this subnetwork is enabled. The value of the field must be in `[0, 1]`. Set the sampling rate of VPC flow logs within the subnetwork where `1.0` means all collected logs are reported and `0.0` means no logs are reported. The
             END
@@ -366,7 +359,6 @@ section {
 
           attribute "metadata" {
             type        = string
-            default     = "INCLUDE_ALL_METADATA"
             description = <<-END
               Can only be specified if VPC flow logging for this subnetwork is enabled. Configures whether metadata fields should be added to the reported VPC flow logs. Possible values are `EXCLUDE_ALL_METADATA`, `INCLUDE_ALL_METADATA`, and `CUSTOM_METADATA`.
             END
@@ -381,7 +373,6 @@ section {
 
           attribute "filter_expr" {
             type        = string
-            default     = "true"
             description = <<-END
               Export filter used to define which VPC flow logs should be logged, as as CEL expression. See `https://cloud.google.com/vpc/docs/flow-logs#filtering` for details on how to format this field. The default value is `true`, which evaluates to include everything.
             END

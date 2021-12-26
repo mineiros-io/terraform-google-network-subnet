@@ -74,18 +74,13 @@ variable "project" {
 variable "default_log_config" {
   description = "(Optional) The default logging options for the subnetwork flow logs. Setting this value to 'null' will disable them. See https://www.terraform.io/docs/providers/google/r/compute_subnetwork.html for more information and examples. Default is '{ aggregation_interval = \"INTERVAL_10_MIN\" flow_sampling = 0.5 metadata = \"INCLUDE_ALL_METADATA\" }'."
   # type = object({
-  #   aggregation_interval = string
-  #   flow_sampling        = number
-  #   metadata             = string
-  #   metadata_fields      = list(string)
-  #   filter_expr          = string
+  #   aggregation_interval = optional(string)
+  #   flow_sampling        = opional(number)
+  #   metadata             = optional(string)
+  #   metadata_fields      = optional(list(string))
+  #   filter_expr          = optional(string)
   # })
-  default = {
-    aggregation_interval = "INTERVAL_10_MIN"
-    flow_sampling        = 0.5
-    metadata             = "INCLUDE_ALL_METADATA"
-    filter_expr          = "true"
-  }
+  default = null
 
   #   validation {
   #     condition = can(regex("^(INTERVAL_5_SEC|INTERVAL_30_SEC|INTERVAL_1_MIN| INTERVAL_5_MIN|INTERVAL_10_MIN|INTERVAL_15_MIN)$", var.default_log_config.aggregation_interval))

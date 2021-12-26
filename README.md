@@ -254,8 +254,6 @@ See [variables.tf] and [examples/] for details and use-cases.
 
   The default logging options for the subnetwork flow logs. Setting this value to `null` will disable them. See https://www.terraform.io/docs/providers/google/r/compute_subnetwork.html for more information and examples.
 
-  Default is `{"aggregation_interval":"INTERVAL_10_MIN","flow_sampling":0.5,"metadata":"INCLUDE_ALL_METADATA"}`.
-
   Example:
 
   ```hcl
@@ -272,19 +270,13 @@ See [variables.tf] and [examples/] for details and use-cases.
 
     Can only be specified if VPC flow logging for this subnetwork is enabled. Toggles the aggregation interval for collecting flow logs. Increasing the interval time will reduce the amount of generated flow logs for long lasting connections. Possible values are `INTERVAL_5_SEC`, `INTERVAL_30_SEC`, `INTERVAL_1_MIN`, `INTERVAL_5_MIN`, `INTERVAL_10_MIN`, and `INTERVAL_15_MIN`.
 
-    Default is `"INTERVAL_10_MIN"`.
-
   - [**`flow_sampling`**](#attr-flow_sampling-default_log_config): *(Optional `number`)*<a name="attr-flow_sampling-default_log_config"></a>
 
     Can only be specified if VPC flow logging for this subnetwork is enabled. The value of the field must be in `[0, 1]`. Set the sampling rate of VPC flow logs within the subnetwork where `1.0` means all collected logs are reported and `0.0` means no logs are reported. The
 
-    Default is `0.5`.
-
   - [**`metadata`**](#attr-metadata-default_log_config): *(Optional `string`)*<a name="attr-metadata-default_log_config"></a>
 
     Can only be specified if VPC flow logging for this subnetwork is enabled. Configures whether metadata fields should be added to the reported VPC flow logs. Possible values are `EXCLUDE_ALL_METADATA`, `INCLUDE_ALL_METADATA`, and `CUSTOM_METADATA`.
-
-    Default is `"INCLUDE_ALL_METADATA"`.
 
   - [**`metadata_fields`**](#attr-metadata_fields-default_log_config): *(Optional `list(string)`)*<a name="attr-metadata_fields-default_log_config"></a>
 
@@ -293,8 +285,6 @@ See [variables.tf] and [examples/] for details and use-cases.
   - [**`filter_expr`**](#attr-filter_expr-default_log_config): *(Optional `string`)*<a name="attr-filter_expr-default_log_config"></a>
 
     Export filter used to define which VPC flow logs should be logged, as as CEL expression. See `https://cloud.google.com/vpc/docs/flow-logs#filtering` for details on how to format this field. The default value is `true`, which evaluates to include everything.
-
-    Default is `"true"`.
 
 ## Module Outputs
 

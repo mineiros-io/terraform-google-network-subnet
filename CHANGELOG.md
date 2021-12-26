@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Set `var.project` to be optional
 - Set `var.subnets` to be required
+- Remove complex default value for `var.default_log_config`
 
 ### Fixed
 
