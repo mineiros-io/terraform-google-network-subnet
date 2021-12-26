@@ -107,13 +107,26 @@ variable "default_log_config" {
 # ------------------------------------------------------------------------------
 
 variable "module_enabled" {
-  description = "(Optional) Whether to create resources within the module or not. Default is 'true'."
   type        = bool
+  description = "(Optional) Whether or not to create resources within the module."
   default     = true
 }
 
-variable "module_depends_on" {
-  description = "(Optional) A list of external resources the module depends_on. Default is '[]'."
+variable "module_timeouts" {
+  description = "(Optional) How long certain operations (per resource type) are allowed to take before being considered to have failed."
   type        = any
+  # type = object({
+  #   google_compute_subnetwork = optional(object({
+  #     create = optional(string)
+  #     update = optional(string)
+  #     delete = optional(string)
+  #   }))
+  # })
+  default = {}
+}
+
+variable "module_depends_on" {
+  type        = any
+  description = "(Optional) A list of external resources the module depends on."
   default     = []
 }

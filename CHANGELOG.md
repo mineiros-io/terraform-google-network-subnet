@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added support for the `module_timeouts` variable
+
 ### Changed
 
 - Set `var.project` to be optional

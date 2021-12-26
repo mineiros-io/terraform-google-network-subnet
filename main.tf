@@ -42,5 +42,15 @@ resource "google_compute_subnetwork" "subnetwork" {
     }
   }
 
+  dynamic "timeouts" {
+    for_each = try([var.module_timeouts.google_compute_subnetwork], [])
+
+    content {
+      create = try(timeouts.value.create, null)
+      update = try(timeouts.value.update, null)
+      delete = try(timeouts.value.delete, null)
+    }
+  }
+
   depends_on = [var.module_depends_on]
 }

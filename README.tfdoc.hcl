@@ -91,10 +91,57 @@ section {
 
         variable "module_enabled" {
           type        = bool
-          default     = true
           description = <<-END
             Specifies whether resources in the module will be created.
           END
+          default     = true
+        }
+
+        variable "module_timeouts" {
+          type           = any
+          readme_type    = "object(resource_name)"
+          description    = <<-END
+            How long certain operations (per resource type) ar allowed to take before being considered to have failed.
+          END
+          default        = {}
+          readme_example = <<-END
+            module_timeouts = {
+              google_compute_subnetwork = {
+                create = "4m"
+                update = "4m"
+                delete = "4m"
+              }
+            }
+          END
+
+          attribute "google_compute_subnetwork" {
+            type        = any
+            readme_type = "object(timeouts)"
+            description = <<-END
+              Timeout for the `google_compute_subnetwork` resource.
+            END
+
+            attribute "create" {
+              type        = string
+              description = <<-END
+                Timeout for `create` operations.
+              END
+            }
+
+            attribute "update" {
+              type        = string
+              description = <<-END
+                Timeout for `update` operations.
+              END
+            }
+
+            attribute "delete" {
+              type        = string
+              description = <<-END
+                Timeout for `delete` operations.
+              END
+            }
+          }
         }
 
         variable "module_depends_on" {
@@ -103,9 +150,10 @@ section {
           description    = <<-END
             A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
           END
+          default     = []
           readme_example = <<-END
             module_depends_on = [
-              google_network.network
+              google_compute_network.vpc
             ]
           END
         }
@@ -115,10 +163,9 @@ section {
         title = "Main Resource Configuration"
 
         variable "project" {
-          required    = true
           type        = string
           description = <<-END
-            The ID of the project in which the resources belong.
+            The ID of the project in which the resource belongs. If it is not set, the provider project is used
           END
         }
 
@@ -146,12 +193,13 @@ section {
           END
           readme_example = <<-END
             subnet = [
-            {
-              name                     = "kubernetes"
-              region                   = "europe-west1"
-              private_ip_google_access = false
-              ip_cidr_range            = "10.0.0.0/20"
-            }]
+              {
+                name                     = "kubernetes"
+                region                   = "europe-west1"
+                private_ip_google_access = false
+                ip_cidr_range            = "10.0.0.0/20"
+              }
+            ]
           END
 
           attribute "name" {
