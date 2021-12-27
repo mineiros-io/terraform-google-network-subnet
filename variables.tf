@@ -53,6 +53,7 @@ variable "subnets" {
   #     }
   #   },
   #   {
+  #     name                     = "test",
   #     region                   = "europe-west1",
   #     private_ip_google_access = false,
   #     ip_cidr_range            = "10.20.0.0/16"
