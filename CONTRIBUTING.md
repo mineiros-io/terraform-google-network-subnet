@@ -77,12 +77,8 @@ If everything looks good, they will merge the code and release a new version whi
 
 <!-- References -->
 
-<!-- markdown-link-check-disable -->
-
 [pull requests]: https://github.com/mineiros-io/terraform-google-network-subnet/pulls
 [pre-commit-file]: https://github.com/mineiros-io/terraform-google-network-subnet/blob/main/.pre-commit-config.yaml
-
-<!-- markdown-link-check-enable -->
 
 [github flow]: https://guides.github.com/introduction/flow/
 [codeowners]: https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners

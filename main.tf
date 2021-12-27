@@ -6,17 +6,17 @@
 
 locals {
   subnet_keys = [for subnet in var.subnets : try(subnet._resource_key, null) != null ? subnet._resource_key : "${subnet.region}/${subnet.name}"]
-
-  subnets = { for idx, subnet in var.subnets : local.subnet_keys[idx] => subnet }
+  subnets     = { for idx, subnet in var.subnets : local.subnet_keys[idx] => subnet }
 }
 
 resource "google_compute_subnetwork" "subnetwork" {
   for_each = var.module_enabled ? local.subnets : {}
 
-  project = var.project
-  network = var.network
-  region  = each.value.region
-  name    = each.value.name
+  project     = var.project
+  network     = var.network
+  region      = each.value.region
+  name        = each.value.name
+  description = try(each.value.description, null)
 
   private_ip_google_access = try(each.value.private_ip_google_access, true)
   ip_cidr_range            = cidrsubnet(each.value.ip_cidr_range, 0, 0)
@@ -39,6 +39,16 @@ resource "google_compute_subnetwork" "subnetwork" {
       metadata             = try(each.value.log_config.metadata, var.default_log_config.metadata, null)
       metadata_fields      = try(each.value.log_config.metadata_fields, var.default_log_config.metadata_fields, null)
       filter_expr          = try(each.value.log_config.filter_expr, var.default_log_config.filter_expr, null)
+    }
+  }
+
+  dynamic "timeouts" {
+    for_each = try([var.module_timeouts.google_compute_subnetwork], [])
+
+    content {
+      create = try(timeouts.value.create, null)
+      update = try(timeouts.value.update, null)
+      delete = try(timeouts.value.delete, null)
     }
   }
 

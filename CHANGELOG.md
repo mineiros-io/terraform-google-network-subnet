@@ -7,11 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added support for the `module_timeouts` variable
+- Added support for the `description` attribute
+
+### Changed
+
+- Set `var.project` to be optional
+- Set `var.subnets` to be required
+- Remove complex default value for `var.default_log_config`
+
+### Fixed
+
+- Add correct example to `README.md`
+
 ## [0.0.2]
 
 ### Added
 
-- Support for provider 4.x
+- Support for provider `4.x`
 
 ## [0.0.1]
 
@@ -19,10 +34,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial Implementation
 
-<!-- markdown-link-check-disable -->
-
 [unreleased]: https://github.com/mineiros-io/terraform-google-network-subnet/compare/v0.0.2...HEAD
 [0.0.2]: https://github.com/mineiros-io/terraform-google-network-subnet/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/mineiros-io/terraform-google-network-subnet/releases/tag/v0.0.1
-
-<!-- markdown-link-check-disabled -->

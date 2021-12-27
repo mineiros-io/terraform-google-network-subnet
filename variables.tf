@@ -3,37 +3,34 @@
 # These variables must be set when using this module.
 # ---------------------------------------------------------------------------------------------------------------------
 
-variable "project" {
-  description = "(Required) The ID of the project in which the resources belong."
-  type        = string
-}
-
 variable "network" {
   description = "(Required) The VPC network the subnets belong to."
   type        = string
 }
 
-# ---------------------------------------------------------------------------------------------------------------------
-# OPTIONAL VARIABLES
-# These variables have defaults, but may be overridden.
-# ---------------------------------------------------------------------------------------------------------------------
-
-variable "mtu" {
-  description = "(Optional) Maximum Transmission Unit in bytes. The minimum value for this field is 1460 and the maximum value is 1500 bytes. Default is '1460'."
-  type        = string
-  default     = 1460
-
-  validation {
-    condition     = var.mtu >= 1460 && var.mtu <= 1500
-    error_message = "The mtu expects a value between '1460' and '1500'."
-  }
-}
-
 variable "subnets" {
-  # TODO implement validation
-  description = "(Optional) A list of subnets to be created with the VPC. Default is 'null'."
+  # TODO: implement validation
+  description = "(Required) A list of subnets to be created with the VPC."
   type        = any
-  default     = null
+  # type = list(object({
+  #   project                  = optional(string)
+  #   name                     = string
+  #   description              = optional(string)
+  #   region                   = string
+  #   private_ip_google_access = optional(bool)
+  #   ip_cidr_range            = string
+  #   secondary_ip_range = optional(list(object({
+  #     range_name    = string
+  #     ip_cidr_range = string
+  #   })))
+  #   log_config = optional(object({
+  #     aggregation_interval = optional(string)
+  #     flow_sampling        = optional(number)
+  #     metadata             = optional(string)
+  #     metadata_fields      = optional(list(string))
+  #     filter_expr          = optional(string)
+  #   }))
+  # }))
 
   # Example
   #
@@ -56,7 +53,6 @@ variable "subnets" {
   #     }
   #   },
   #   {
-  #     class                    = "public",
   #     region                   = "europe-west1",
   #     private_ip_google_access = false,
   #     ip_cidr_range            = "10.20.0.0/16"
@@ -64,20 +60,27 @@ variable "subnets" {
   # ]
 }
 
+# ---------------------------------------------------------------------------------------------------------------------
+# OPTIONAL VARIABLES
+# These variables have defaults, but may be overridden.
+# ---------------------------------------------------------------------------------------------------------------------
+
+variable "project" {
+  type        = string
+  description = "(Optional) The ID of the project in which the resources belong. If it is not set, the provider project is used."
+  default     = null
+}
+
 variable "default_log_config" {
   description = "(Optional) The default logging options for the subnetwork flow logs. Setting this value to 'null' will disable them. See https://www.terraform.io/docs/providers/google/r/compute_subnetwork.html for more information and examples. Default is '{ aggregation_interval = \"INTERVAL_10_MIN\" flow_sampling = 0.5 metadata = \"INCLUDE_ALL_METADATA\" }'."
   # type = object({
-  #   aggregation_interval = string
-  #   flow_sampling        = number
-  #   metadata             = string
-  #   metadata_fields      = list(string)
-  #   filter_expr          = string
+  #   aggregation_interval = optional(string)
+  #   flow_sampling        = opional(number)
+  #   metadata             = optional(string)
+  #   metadata_fields      = optional(list(string))
+  #   filter_expr          = optional(string)
   # })
-  default = {
-    aggregation_interval = "INTERVAL_10_MIN"
-    flow_sampling        = 0.5
-    metadata             = "INCLUDE_ALL_METADATA"
-  }
+  default = null
 
   #   validation {
   #     condition = can(regex("^(INTERVAL_5_SEC|INTERVAL_30_SEC|INTERVAL_1_MIN| INTERVAL_5_MIN|INTERVAL_10_MIN|INTERVAL_15_MIN)$", var.default_log_config.aggregation_interval))
@@ -106,13 +109,26 @@ variable "default_log_config" {
 # ------------------------------------------------------------------------------
 
 variable "module_enabled" {
-  description = "(Optional) Whether to create resources within the module or not. Default is 'true'."
   type        = bool
+  description = "(Optional) Whether or not to create resources within the module."
   default     = true
 }
 
-variable "module_depends_on" {
-  description = "(Optional) A list of external resources the module depends_on. Default is '[]'."
+variable "module_timeouts" {
+  description = "(Optional) How long certain operations (per resource type) are allowed to take before being considered to have failed."
   type        = any
+  # type = object({
+  #   google_compute_subnetwork = optional(object({
+  #     create = optional(string)
+  #     update = optional(string)
+  #     delete = optional(string)
+  #   }))
+  # })
+  default = {}
+}
+
+variable "module_depends_on" {
+  type        = any
+  description = "(Optional) A list of external resources the module depends on."
   default     = []
 }

@@ -37,7 +37,9 @@ section {
   title   = "terraform-google-network-subnet"
   toc     = true
   content = <<-END
-    A [Terraform](https://www.terraform.io) module to create a [Google Network Subnet](https://cloud.google.com/vpc/docs/vpc#vpc_networks_and_subnets) on [Google Cloud Services (GCP)](https://cloud.google.com/).
+    A [Terraform](https://www.terraform.io) module to create
+    [Google Network Subnets](https://cloud.google.com/vpc/docs/vpc#vpc_networks_and_subnets)
+    on [Google Cloud Services (GCP)](https://cloud.google.com/).
 
     **_This module supports Terraform version 1
     and is compatible with the Terraform Google Provider version 4._**
@@ -50,7 +52,11 @@ section {
   section {
     title   = "Module Features"
     content = <<-END
-      A [Terraform] base module for creating `terraform-google-compute-subnetwork` which creates a subnet into a specified VPC. Each VPC network is subdivided into subnets, and each subnet is contained within a single region. You can have more than one subnet in a region for a given VPC network. If no `log_config` is specified `default_log_config` with best practices will be applied.
+      A [Terraform] module for creating `google_compute_subnetwork` resources
+      which create subnets for a specified VPC. Each VPC network is subdivided
+      into subnets, and each subnet is contained within a single region.
+      You can have more than one subnet in a region for a given VPC network.
+      If no `log_config` is specified `default_log_config` with best practices will be applied.
     END
   }
 
@@ -63,15 +69,21 @@ section {
       module "terraform-google-network-subnet" {
         source = "github.com/mineiros-io/terraform-google-network-subnet.git?ref=v0.1.0"
 
-        name          = "test-subnetwork"
-        ip_cidr_range = "10.2.0.0/16"
-        region        = "us-central1"
-        network       = google_compute_network.custom-test.id
+        network = google_compute_network.custom-test.id
+        subnets = [
+          {
+            name          = "test-subnetwork"
+            ip_cidr_range = "10.2.0.0/16"
+            region        = "us-central1"
 
-        secondary_ip_range {
-          range_name    = "tf-test-secondary-range-update1"
-          ip_cidr_range = "192.168.10.0/24"
-        }
+            secondary_ip_ranges = [
+              {
+                range_name    = "kubernetes-pods"
+                ip_cidr_range = "10.10.0.0/20"
+              }
+            ]
+          }
+        ]
       }
       ```
     END
@@ -91,10 +103,57 @@ section {
 
         variable "module_enabled" {
           type        = bool
-          default     = true
           description = <<-END
             Specifies whether resources in the module will be created.
           END
+          default     = true
+        }
+
+        variable "module_timeouts" {
+          type           = any
+          readme_type    = "object(resource_name)"
+          description    = <<-END
+            How long certain operations (per resource type) ar allowed to take before being considered to have failed.
+          END
+          default        = {}
+          readme_example = <<-END
+            module_timeouts = {
+              google_compute_subnetwork = {
+                create = "4m"
+                update = "4m"
+                delete = "4m"
+              }
+            }
+          END
+
+          attribute "google_compute_subnetwork" {
+            type        = any
+            readme_type = "object(timeouts)"
+            description = <<-END
+              Timeout for the `google_compute_subnetwork` resource.
+            END
+
+            attribute "create" {
+              type        = string
+              description = <<-END
+                Timeout for `create` operations.
+              END
+            }
+
+            attribute "update" {
+              type        = string
+              description = <<-END
+                Timeout for `update` operations.
+              END
+            }
+
+            attribute "delete" {
+              type        = string
+              description = <<-END
+                Timeout for `delete` operations.
+              END
+            }
+          }
         }
 
         variable "module_depends_on" {
@@ -103,9 +162,10 @@ section {
           description    = <<-END
             A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
           END
+          default     = []
           readme_example = <<-END
             module_depends_on = [
-              google_network.network
+              google_compute_network.vpc
             ]
           END
         }
@@ -115,10 +175,9 @@ section {
         title = "Main Resource Configuration"
 
         variable "project" {
-          required    = true
           type        = string
           description = <<-END
-            The ID of the project in which the resources belong.
+            The ID of the project in which the resources belong. If it is not set, the provider project is used.
           END
         }
 
@@ -126,19 +185,12 @@ section {
           required    = true
           type        = string
           description = <<-END
-            The VPC network the subnets belong to.
-          END
-        }
-
-        variable "mtu" {
-          type        = string
-          default     = "1460"
-          description = <<-END
-            Maximum Transmission Unit in bytes. The minimum value for this field is 1460 and the maximum value is 1500 bytes.
+            The VPC network the subnets belong to. Only networks that are in the distributed mode can have subnetworks.
           END
         }
 
         variable "subnets" {
+          required       = true
           type           = any
           readme_type    = "list(subnets)"
           description    = <<-END
@@ -146,23 +198,32 @@ section {
           END
           readme_example = <<-END
             subnet = [
-            {
-              name                     = "kubernetes"
-              region                   = "europe-west1"
-              private_ip_google_access = false
-              ip_cidr_range            = "10.0.0.0/20"
-            }]
+              {
+                name                     = "kubernetes"
+                region                   = "europe-west1"
+                private_ip_google_access = false
+                ip_cidr_range            = "10.0.0.0/20"
+              }
+            ]
           END
 
           attribute "name" {
             required    = true
             type        = string
             description = <<-END
-              The name of the resource, provided by the client when initially creating the resource.
+              The name of this subnetwork, provided by the client when initially creating the resource. The name must be 1-63 characters long, and comply with [RFC1035](https://datatracker.ietf.org/doc/html/rfc1035). Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+            END
+          }
+
+          attribute "description" {
+            type        = string
+            description = <<-END
+              An optional description of this subnetwork. Provide this property when you create the resource. This field can be set only at resource creation time.
             END
           }
 
           attribute "region" {
+            required    = true
             type        = string
             description = <<-END
               The GCP region for this subnetwork.
@@ -193,8 +254,8 @@ section {
             END
             readme_example = <<-END
               secondary_ip_range {
-                range_name = "tf-test-secondary-range-update1"
-                ip_cidr_range        = "192.168.10.0/24"
+                range_name    = "tf-test-secondary-range-update1"
+                ip_cidr_range = "192.168.10.0/24"
               }
             END
 
@@ -271,11 +332,6 @@ section {
         variable "default_log_config" {
           type           = any
           readme_type    = "object(default_log_config)"
-          default        = { 
-            aggregation_interval = "INTERVAL_10_MIN" 
-            flow_sampling = 0.5 
-            metadata = "INCLUDE_ALL_METADATA" 
-          }
           description    = <<-END
             The default logging options for the subnetwork flow logs. Setting this value to `null` will disable them. See https://www.terraform.io/docs/providers/google/r/compute_subnetwork.html for more information and examples.
           END
@@ -289,7 +345,6 @@ section {
 
           attribute "aggregation_interval" {
             type        = string
-            default     = "INTERVAL_10_MIN"
             description = <<-END
               Can only be specified if VPC flow logging for this subnetwork is enabled. Toggles the aggregation interval for collecting flow logs. Increasing the interval time will reduce the amount of generated flow logs for long lasting connections. Possible values are `INTERVAL_5_SEC`, `INTERVAL_30_SEC`, `INTERVAL_1_MIN`, `INTERVAL_5_MIN`, `INTERVAL_10_MIN`, and `INTERVAL_15_MIN`.
             END
@@ -297,7 +352,6 @@ section {
 
           attribute "flow_sampling" {
             type        = number
-            default     = 0.5
             description = <<-END
               Can only be specified if VPC flow logging for this subnetwork is enabled. The value of the field must be in `[0, 1]`. Set the sampling rate of VPC flow logs within the subnetwork where `1.0` means all collected logs are reported and `0.0` means no logs are reported. The
             END
@@ -305,15 +359,13 @@ section {
 
           attribute "metadata" {
             type        = string
-            default     = "INCLUDE_ALL_METADATA"
             description = <<-END
-              Can only be specified if VPC flow logging for this subnetwork is enabled. Configures whether metadata fields should be added to the reported VPC flow logs.
+              Can only be specified if VPC flow logging for this subnetwork is enabled. Configures whether metadata fields should be added to the reported VPC flow logs. Possible values are `EXCLUDE_ALL_METADATA`, `INCLUDE_ALL_METADATA`, and `CUSTOM_METADATA`.
             END
           }
 
           attribute "metadata_fields" {
             type        = list(string)
-            default     = "CUSTOM_METADATA"
             description = <<-END
               List of metadata fields that should be added to reported logs. Can only be specified if VPC flow logs for this subnetwork is `enabled` and `metadata` is set to `CUSTOM_METADATA`.
             END
@@ -321,7 +373,6 @@ section {
 
           attribute "filter_expr" {
             type        = string
-            default     = "true"
             description = <<-END
               Export filter used to define which VPC flow logs should be logged, as as CEL expression. See `https://cloud.google.com/vpc/docs/flow-logs#filtering` for details on how to format this field. The default value is `true`, which evaluates to include everything.
             END
