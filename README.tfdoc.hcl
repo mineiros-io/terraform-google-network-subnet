@@ -110,8 +110,7 @@ section {
         }
 
         variable "module_timeouts" {
-          type           = any
-          readme_type    = "object(resource_name)"
+          type           = object(resource_name)
           description    = <<-END
             How long certain operations (per resource type) ar allowed to take before being considered to have failed.
           END
@@ -127,8 +126,7 @@ section {
           END
 
           attribute "google_compute_subnetwork" {
-            type        = any
-            readme_type = "object(timeouts)"
+            type        = object(timeouts)
             description = <<-END
               Timeout for the `google_compute_subnetwork` resource.
             END
@@ -157,12 +155,11 @@ section {
         }
 
         variable "module_depends_on" {
-          type           = any
-          readme_type    = "list(dependencies)"
+          type           = list(dependency)
           description    = <<-END
             A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
           END
-          default     = []
+          default        = []
           readme_example = <<-END
             module_depends_on = [
               google_compute_network.vpc
@@ -191,8 +188,7 @@ section {
 
         variable "subnets" {
           required       = true
-          type           = any
-          readme_type    = "list(subnets)"
+          type           = list(subnet)
           description    = <<-END
             A list of subnets to be created with the VPC.
           END
@@ -247,8 +243,7 @@ section {
           }
 
           attribute "secondary_ip_ranges" {
-            type           = any
-            readme_type    = "list(secondary_ip_range)"
+            type           = list(secondary_ip_range)
             description    = <<-END
               An array of configurations for secondary IP ranges for VM instances contained in this subnetwork. The primary IP of such VM must belong to the primary ipCidrRange of the subnetwork. The alias IPs may belong to either primary or secondary ranges.
             END
@@ -277,8 +272,7 @@ section {
           }
 
           attribute "log_config" {
-            type           = any
-            readme_type    = "object(log_config)"
+            type           = object(log_config)
             description    = <<-END
               An array of configurations for secondary IP ranges for VM instances contained in this subnetwork. The primary IP of such VM must belong to the primary ipCidrRange of the subnetwork. The alias IPs may belong to either primary or secondary ranges.
             END
@@ -330,8 +324,7 @@ section {
         }
 
         variable "default_log_config" {
-          type           = any
-          readme_type    = "object(default_log_config)"
+          type           = object(default_log_config)
           description    = <<-END
             The default logging options for the subnetwork flow logs. Setting this value to `null` will disable them. See https://www.terraform.io/docs/providers/google/r/compute_subnetwork.html for more information and examples.
           END
@@ -386,15 +379,21 @@ section {
     title   = "Module Outputs"
     content = <<-END
       The following attributes are exported in the outputs of the module:
-
-      - **`module_enabled`**
-
-        Whether this module is enabled.
-
-      - **`subnetworks`**
-
-        The created subnet resources.
     END
+
+    output "module_enabled" {
+      type        = bool
+      description = <<-END
+        Whether this module is enabled.
+      END
+    }
+
+    output "subnetworks" {
+      type        = map(subnetwork)
+      description = <<-END
+        The created subnet resources.
+      END
+    }
   }
 
   section {
@@ -489,7 +488,7 @@ section {
 }
 
 references {
-  ref "homepage"{
+  ref "homepage" {
     value = "https://mineiros.io/?ref=terraform-google-network-subnet"
   }
   ref "hello@mineiros.io" {
