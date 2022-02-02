@@ -104,27 +104,27 @@ See [variables.tf] and [examples/] for details and use-cases.
   }
   ```
 
-  The object accepts the following attributes:
+  The `resource_name` object accepts the following attributes:
 
-  - [**`google_compute_subnetwork`**](#attr-google_compute_subnetwork-module_timeouts): *(Optional `object(timeouts)`)*<a name="attr-google_compute_subnetwork-module_timeouts"></a>
+  - [**`google_compute_subnetwork`**](#attr-module_timeouts-google_compute_subnetwork): *(Optional `object(timeouts)`)*<a name="attr-module_timeouts-google_compute_subnetwork"></a>
 
     Timeout for the `google_compute_subnetwork` resource.
 
-    The object accepts the following attributes:
+    The `timeouts` object accepts the following attributes:
 
-    - [**`create`**](#attr-create-google_compute_subnetwork-module_timeouts): *(Optional `string`)*<a name="attr-create-google_compute_subnetwork-module_timeouts"></a>
+    - [**`create`**](#attr-module_timeouts-google_compute_subnetwork-create): *(Optional `string`)*<a name="attr-module_timeouts-google_compute_subnetwork-create"></a>
 
       Timeout for `create` operations.
 
-    - [**`update`**](#attr-update-google_compute_subnetwork-module_timeouts): *(Optional `string`)*<a name="attr-update-google_compute_subnetwork-module_timeouts"></a>
+    - [**`update`**](#attr-module_timeouts-google_compute_subnetwork-update): *(Optional `string`)*<a name="attr-module_timeouts-google_compute_subnetwork-update"></a>
 
       Timeout for `update` operations.
 
-    - [**`delete`**](#attr-delete-google_compute_subnetwork-module_timeouts): *(Optional `string`)*<a name="attr-delete-google_compute_subnetwork-module_timeouts"></a>
+    - [**`delete`**](#attr-module_timeouts-google_compute_subnetwork-delete): *(Optional `string`)*<a name="attr-module_timeouts-google_compute_subnetwork-delete"></a>
 
       Timeout for `delete` operations.
 
-- [**`module_depends_on`**](#var-module_depends_on): *(Optional `list(dependencies)`)*<a name="var-module_depends_on"></a>
+- [**`module_depends_on`**](#var-module_depends_on): *(Optional `list(dependency)`)*<a name="var-module_depends_on"></a>
 
   A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
 
@@ -148,7 +148,7 @@ See [variables.tf] and [examples/] for details and use-cases.
 
   The VPC network the subnets belong to. Only networks that are in the distributed mode can have subnetworks.
 
-- [**`subnets`**](#var-subnets): *(**Required** `list(subnets)`)*<a name="var-subnets"></a>
+- [**`subnets`**](#var-subnets): *(**Required** `list(subnet)`)*<a name="var-subnets"></a>
 
   A list of subnets to be created with the VPC.
 
@@ -165,31 +165,31 @@ See [variables.tf] and [examples/] for details and use-cases.
   ]
   ```
 
-  The object accepts the following attributes:
+  Each `subnet` object in the list accepts the following attributes:
 
-  - [**`name`**](#attr-name-subnets): *(**Required** `string`)*<a name="attr-name-subnets"></a>
+  - [**`name`**](#attr-subnets-name): *(**Required** `string`)*<a name="attr-subnets-name"></a>
 
     The name of this subnetwork, provided by the client when initially creating the resource. The name must be 1-63 characters long, and comply with [RFC1035](https://datatracker.ietf.org/doc/html/rfc1035). Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
 
-  - [**`description`**](#attr-description-subnets): *(Optional `string`)*<a name="attr-description-subnets"></a>
+  - [**`description`**](#attr-subnets-description): *(Optional `string`)*<a name="attr-subnets-description"></a>
 
     An optional description of this subnetwork. Provide this property when you create the resource. This field can be set only at resource creation time.
 
-  - [**`region`**](#attr-region-subnets): *(**Required** `string`)*<a name="attr-region-subnets"></a>
+  - [**`region`**](#attr-subnets-region): *(**Required** `string`)*<a name="attr-subnets-region"></a>
 
     The GCP region for this subnetwork.
 
-  - [**`private_ip_google_access`**](#attr-private_ip_google_access-subnets): *(Optional `bool`)*<a name="attr-private_ip_google_access-subnets"></a>
+  - [**`private_ip_google_access`**](#attr-subnets-private_ip_google_access): *(Optional `bool`)*<a name="attr-subnets-private_ip_google_access"></a>
 
     When enabled, VMs in this subnetwork without external IP addresses can access Google APIs and services by using Private Google Access.
 
     Default is `true`.
 
-  - [**`ip_cidr_range`**](#attr-ip_cidr_range-subnets): *(**Required** `string`)*<a name="attr-ip_cidr_range-subnets"></a>
+  - [**`ip_cidr_range`**](#attr-subnets-ip_cidr_range): *(**Required** `string`)*<a name="attr-subnets-ip_cidr_range"></a>
 
     The range of internal addresses that are owned by this subnetwork. Provide this property when you create the subnetwork. For example, 10.0.0.0/8 or 192.168.0.0/16. Ranges must be unique and non-overlapping within a network. Only IPv4 is supported.
 
-  - [**`secondary_ip_ranges`**](#attr-secondary_ip_ranges-subnets): *(Optional `list(secondary_ip_range)`)*<a name="attr-secondary_ip_ranges-subnets"></a>
+  - [**`secondary_ip_ranges`**](#attr-subnets-secondary_ip_ranges): *(Optional `list(secondary_ip_range)`)*<a name="attr-subnets-secondary_ip_ranges"></a>
 
     An array of configurations for secondary IP ranges for VM instances contained in this subnetwork. The primary IP of such VM must belong to the primary ipCidrRange of the subnetwork. The alias IPs may belong to either primary or secondary ranges.
 
@@ -202,17 +202,17 @@ See [variables.tf] and [examples/] for details and use-cases.
     }
     ```
 
-    The object accepts the following attributes:
+    Each `secondary_ip_range` object in the list accepts the following attributes:
 
-    - [**`range_name`**](#attr-range_name-secondary_ip_ranges-subnets): *(**Required** `string`)*<a name="attr-range_name-secondary_ip_ranges-subnets"></a>
+    - [**`range_name`**](#attr-subnets-secondary_ip_ranges-range_name): *(**Required** `string`)*<a name="attr-subnets-secondary_ip_ranges-range_name"></a>
 
       The name associated with this subnetwork secondary range, used when adding an alias IP range to a VM instance. The name must be 1-63 characters long, and comply with RFC1035. The name must be unique within the subnetwork.
 
-    - [**`ip_cidr_range`**](#attr-ip_cidr_range-secondary_ip_ranges-subnets): *(**Required** `string`)*<a name="attr-ip_cidr_range-secondary_ip_ranges-subnets"></a>
+    - [**`ip_cidr_range`**](#attr-subnets-secondary_ip_ranges-ip_cidr_range): *(**Required** `string`)*<a name="attr-subnets-secondary_ip_ranges-ip_cidr_range"></a>
 
       The range of IP addresses belonging to this subnetwork secondary range. Provide this property when you create the subnetwork. Ranges must be unique and non-overlapping with all primary and secondary IP ranges within a network. Only `IPv4` is supported.
 
-  - [**`log_config`**](#attr-log_config-subnets): *(Optional `object(log_config)`)*<a name="attr-log_config-subnets"></a>
+  - [**`log_config`**](#attr-subnets-log_config): *(Optional `object(log_config)`)*<a name="attr-subnets-log_config"></a>
 
     An array of configurations for secondary IP ranges for VM instances contained in this subnetwork. The primary IP of such VM must belong to the primary ipCidrRange of the subnetwork. The alias IPs may belong to either primary or secondary ranges.
 
@@ -228,25 +228,25 @@ See [variables.tf] and [examples/] for details and use-cases.
     }
     ```
 
-    The object accepts the following attributes:
+    The `log_config` object accepts the following attributes:
 
-    - [**`aggregation_interval`**](#attr-aggregation_interval-log_config-subnets): *(Optional `string`)*<a name="attr-aggregation_interval-log_config-subnets"></a>
+    - [**`aggregation_interval`**](#attr-subnets-log_config-aggregation_interval): *(Optional `string`)*<a name="attr-subnets-log_config-aggregation_interval"></a>
 
       Can only be specified if VPC flow logging for this subnetwork is enabled. Toggles the aggregation interval for collecting flow logs. Increasing the interval time will reduce the amount of generated flow logs for long lasting connections. Default is an interval of `5 seconds` per connection. Possible values are `INTERVAL_5_SEC`, `INTERVAL_30_SEC`, `INTERVAL_1_MIN`, `INTERVAL_5_MIN`, `INTERVAL_10_MIN`, and `INTERVAL_15_MIN`.
 
-    - [**`flow_sampling`**](#attr-flow_sampling-log_config-subnets): *(Optional `number`)*<a name="attr-flow_sampling-log_config-subnets"></a>
+    - [**`flow_sampling`**](#attr-subnets-log_config-flow_sampling): *(Optional `number`)*<a name="attr-subnets-log_config-flow_sampling"></a>
 
       Can only be specified if VPC flow logging for this subnetwork is enabled. The value of the field must be in `[0, 1]`. Set the sampling rate of VPC flow logs within the subnetwork where `1.0` means all collected logs are reported and `0.0` means no logs are reported.
 
-    - [**`metadata`**](#attr-metadata-log_config-subnets): *(Optional `string`)*<a name="attr-metadata-log_config-subnets"></a>
+    - [**`metadata`**](#attr-subnets-log_config-metadata): *(Optional `string`)*<a name="attr-subnets-log_config-metadata"></a>
 
       Can only be specified if VPC flow logging for this subnetwork is `enabled`. Configures whether metadata fields should be added to the reported VPC flow logs. Possible values are `EXCLUDE_ALL_METADATA`, `INCLUDE_ALL_METADATA`, and `CUSTOM_METADATA`.
 
-    - [**`metadata_fields`**](#attr-metadata_fields-log_config-subnets): *(Optional `list(string)`)*<a name="attr-metadata_fields-log_config-subnets"></a>
+    - [**`metadata_fields`**](#attr-subnets-log_config-metadata_fields): *(Optional `list(string)`)*<a name="attr-subnets-log_config-metadata_fields"></a>
 
       List of metadata fields that should be added to reported logs. Can only be specified if VPC flow logs for this subnetwork is `enabled` and `"metadata"` is set to `CUSTOM_METADATA`.
 
-    - [**`filter_expr`**](#attr-filter_expr-log_config-subnets): *(Optional `string`)*<a name="attr-filter_expr-log_config-subnets"></a>
+    - [**`filter_expr`**](#attr-subnets-log_config-filter_expr): *(Optional `string`)*<a name="attr-subnets-log_config-filter_expr"></a>
 
       Export filter used to define which VPC flow logs should be logged, as as CEL expression. See https://cloud.google.com/vpc/docs/flow-logs#filtering for details on how to format this field.
 
@@ -264,25 +264,25 @@ See [variables.tf] and [examples/] for details and use-cases.
   }
   ```
 
-  The object accepts the following attributes:
+  The `default_log_config` object accepts the following attributes:
 
-  - [**`aggregation_interval`**](#attr-aggregation_interval-default_log_config): *(Optional `string`)*<a name="attr-aggregation_interval-default_log_config"></a>
+  - [**`aggregation_interval`**](#attr-default_log_config-aggregation_interval): *(Optional `string`)*<a name="attr-default_log_config-aggregation_interval"></a>
 
     Can only be specified if VPC flow logging for this subnetwork is enabled. Toggles the aggregation interval for collecting flow logs. Increasing the interval time will reduce the amount of generated flow logs for long lasting connections. Possible values are `INTERVAL_5_SEC`, `INTERVAL_30_SEC`, `INTERVAL_1_MIN`, `INTERVAL_5_MIN`, `INTERVAL_10_MIN`, and `INTERVAL_15_MIN`.
 
-  - [**`flow_sampling`**](#attr-flow_sampling-default_log_config): *(Optional `number`)*<a name="attr-flow_sampling-default_log_config"></a>
+  - [**`flow_sampling`**](#attr-default_log_config-flow_sampling): *(Optional `number`)*<a name="attr-default_log_config-flow_sampling"></a>
 
     Can only be specified if VPC flow logging for this subnetwork is enabled. The value of the field must be in `[0, 1]`. Set the sampling rate of VPC flow logs within the subnetwork where `1.0` means all collected logs are reported and `0.0` means no logs are reported. The
 
-  - [**`metadata`**](#attr-metadata-default_log_config): *(Optional `string`)*<a name="attr-metadata-default_log_config"></a>
+  - [**`metadata`**](#attr-default_log_config-metadata): *(Optional `string`)*<a name="attr-default_log_config-metadata"></a>
 
     Can only be specified if VPC flow logging for this subnetwork is enabled. Configures whether metadata fields should be added to the reported VPC flow logs. Possible values are `EXCLUDE_ALL_METADATA`, `INCLUDE_ALL_METADATA`, and `CUSTOM_METADATA`.
 
-  - [**`metadata_fields`**](#attr-metadata_fields-default_log_config): *(Optional `list(string)`)*<a name="attr-metadata_fields-default_log_config"></a>
+  - [**`metadata_fields`**](#attr-default_log_config-metadata_fields): *(Optional `list(string)`)*<a name="attr-default_log_config-metadata_fields"></a>
 
     List of metadata fields that should be added to reported logs. Can only be specified if VPC flow logs for this subnetwork is `enabled` and `metadata` is set to `CUSTOM_METADATA`.
 
-  - [**`filter_expr`**](#attr-filter_expr-default_log_config): *(Optional `string`)*<a name="attr-filter_expr-default_log_config"></a>
+  - [**`filter_expr`**](#attr-default_log_config-filter_expr): *(Optional `string`)*<a name="attr-default_log_config-filter_expr"></a>
 
     Export filter used to define which VPC flow logs should be logged, as as CEL expression. See `https://cloud.google.com/vpc/docs/flow-logs#filtering` for details on how to format this field. The default value is `true`, which evaluates to include everything.
 
@@ -290,11 +290,11 @@ See [variables.tf] and [examples/] for details and use-cases.
 
 The following attributes are exported in the outputs of the module:
 
-- **`module_enabled`**
+- [**`module_enabled`**](#output-module_enabled): *(`bool`)*<a name="output-module_enabled"></a>
 
   Whether this module is enabled.
 
-- **`subnetworks`**
+- [**`subnetworks`**](#output-subnetworks): *(`map(subnetwork)`)*<a name="output-subnetworks"></a>
 
   The created subnet resources.
 
