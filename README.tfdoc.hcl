@@ -67,7 +67,7 @@ section {
 
       ```hcl
       module "terraform-google-network-subnet" {
-        source = "github.com/mineiros-io/terraform-google-network-subnet.git?ref=v0.1.0"
+        source = "github.com/mineiros-io/terraform-google-network-subnet.git?ref=v0.0.2"
 
         network = google_compute_network.custom-test.id
         subnets = [
@@ -162,7 +162,7 @@ section {
           description    = <<-END
             A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
           END
-          default     = []
+          default        = []
           readme_example = <<-END
             module_depends_on = [
               google_compute_network.vpc
@@ -489,7 +489,7 @@ section {
 }
 
 references {
-  ref "homepage"{
+  ref "homepage" {
     value = "https://mineiros.io/?ref=terraform-google-network-subnet"
   }
   ref "hello@mineiros.io" {
