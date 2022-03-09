@@ -86,7 +86,7 @@ See [variables.tf] and [examples/] for details and use-cases.
 
   Default is `true`.
 
-- [**`module_timeouts`**](#var-module_timeouts): *(Optional `object`)*<a name="var-module_timeouts"></a>
+- [**`module_timeouts`**](#var-module_timeouts): *(Optional `object(resource_name)`)*<a name="var-module_timeouts"></a>
 
   How long certain operations (per resource type) ar allowed to take before being considered to have failed.
 
@@ -104,13 +104,13 @@ See [variables.tf] and [examples/] for details and use-cases.
   }
   ```
 
-  The object accepts the following attributes:
+  The `resource_name` object accepts the following attributes:
 
-  - [**`google_compute_subnetwork`**](#attr-module_timeouts-google_compute_subnetwork): *(Optional `object`)*<a name="attr-module_timeouts-google_compute_subnetwork"></a>
+  - [**`google_compute_subnetwork`**](#attr-module_timeouts-google_compute_subnetwork): *(Optional `object(timeouts)`)*<a name="attr-module_timeouts-google_compute_subnetwork"></a>
 
     Timeout for the `google_compute_subnetwork` resource.
 
-    The object accepts the following attributes:
+    The `timeouts` object accepts the following attributes:
 
     - [**`create`**](#attr-module_timeouts-google_compute_subnetwork-create): *(Optional `string`)*<a name="attr-module_timeouts-google_compute_subnetwork-create"></a>
 
@@ -124,7 +124,7 @@ See [variables.tf] and [examples/] for details and use-cases.
 
       Timeout for `delete` operations.
 
-- [**`module_depends_on`**](#var-module_depends_on): *(Optional `object`)*<a name="var-module_depends_on"></a>
+- [**`module_depends_on`**](#var-module_depends_on): *(Optional `list(dependencies)`)*<a name="var-module_depends_on"></a>
 
   A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
 
@@ -148,7 +148,7 @@ See [variables.tf] and [examples/] for details and use-cases.
 
   The VPC network the subnets belong to. Only networks that are in the distributed mode can have subnetworks.
 
-- [**`subnets`**](#var-subnets): *(**Required** `object`)*<a name="var-subnets"></a>
+- [**`subnets`**](#var-subnets): *(**Required** `list(subnets)`)*<a name="var-subnets"></a>
 
   A list of subnets to be created with the VPC.
 
@@ -165,7 +165,7 @@ See [variables.tf] and [examples/] for details and use-cases.
   ]
   ```
 
-  The object accepts the following attributes:
+  Each `subnets` object in the list accepts the following attributes:
 
   - [**`name`**](#attr-subnets-name): *(**Required** `string`)*<a name="attr-subnets-name"></a>
 
@@ -189,7 +189,7 @@ See [variables.tf] and [examples/] for details and use-cases.
 
     The range of internal addresses that are owned by this subnetwork. Provide this property when you create the subnetwork. For example, 10.0.0.0/8 or 192.168.0.0/16. Ranges must be unique and non-overlapping within a network. Only IPv4 is supported.
 
-  - [**`secondary_ip_ranges`**](#attr-subnets-secondary_ip_ranges): *(Optional `object`)*<a name="attr-subnets-secondary_ip_ranges"></a>
+  - [**`secondary_ip_ranges`**](#attr-subnets-secondary_ip_ranges): *(Optional `list(secondary_ip_range)`)*<a name="attr-subnets-secondary_ip_ranges"></a>
 
     An array of configurations for secondary IP ranges for VM instances contained in this subnetwork. The primary IP of such VM must belong to the primary ipCidrRange of the subnetwork. The alias IPs may belong to either primary or secondary ranges.
 
@@ -202,7 +202,7 @@ See [variables.tf] and [examples/] for details and use-cases.
     }
     ```
 
-    The object accepts the following attributes:
+    Each `secondary_ip_range` object in the list accepts the following attributes:
 
     - [**`range_name`**](#attr-subnets-secondary_ip_ranges-range_name): *(**Required** `string`)*<a name="attr-subnets-secondary_ip_ranges-range_name"></a>
 
@@ -212,7 +212,7 @@ See [variables.tf] and [examples/] for details and use-cases.
 
       The range of IP addresses belonging to this subnetwork secondary range. Provide this property when you create the subnetwork. Ranges must be unique and non-overlapping with all primary and secondary IP ranges within a network. Only `IPv4` is supported.
 
-  - [**`log_config`**](#attr-subnets-log_config): *(Optional `object`)*<a name="attr-subnets-log_config"></a>
+  - [**`log_config`**](#attr-subnets-log_config): *(Optional `object(log_config)`)*<a name="attr-subnets-log_config"></a>
 
     An array of configurations for secondary IP ranges for VM instances contained in this subnetwork. The primary IP of such VM must belong to the primary ipCidrRange of the subnetwork. The alias IPs may belong to either primary or secondary ranges.
 
@@ -228,7 +228,7 @@ See [variables.tf] and [examples/] for details and use-cases.
     }
     ```
 
-    The object accepts the following attributes:
+    The `log_config` object accepts the following attributes:
 
     - [**`aggregation_interval`**](#attr-subnets-log_config-aggregation_interval): *(Optional `string`)*<a name="attr-subnets-log_config-aggregation_interval"></a>
 
@@ -250,7 +250,7 @@ See [variables.tf] and [examples/] for details and use-cases.
 
       Export filter used to define which VPC flow logs should be logged, as as CEL expression. See https://cloud.google.com/vpc/docs/flow-logs#filtering for details on how to format this field.
 
-- [**`default_log_config`**](#var-default_log_config): *(Optional `object`)*<a name="var-default_log_config"></a>
+- [**`default_log_config`**](#var-default_log_config): *(Optional `object(default_log_config)`)*<a name="var-default_log_config"></a>
 
   The default logging options for the subnetwork flow logs. Setting this value to `null` will disable them. See https://www.terraform.io/docs/providers/google/r/compute_subnetwork.html for more information and examples.
 
@@ -264,7 +264,7 @@ See [variables.tf] and [examples/] for details and use-cases.
   }
   ```
 
-  The object accepts the following attributes:
+  The `default_log_config` object accepts the following attributes:
 
   - [**`aggregation_interval`**](#attr-default_log_config-aggregation_interval): *(Optional `string`)*<a name="attr-default_log_config-aggregation_interval"></a>
 
