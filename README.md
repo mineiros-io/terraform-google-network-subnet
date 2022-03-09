@@ -124,7 +124,7 @@ See [variables.tf] and [examples/] for details and use-cases.
 
       Timeout for `delete` operations.
 
-- [**`module_depends_on`**](#var-module_depends_on): *(Optional `list(dependencies)`)*<a name="var-module_depends_on"></a>
+- [**`module_depends_on`**](#var-module_depends_on): *(Optional `list(dependency)`)*<a name="var-module_depends_on"></a>
 
   A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
 
@@ -148,7 +148,7 @@ See [variables.tf] and [examples/] for details and use-cases.
 
   The VPC network the subnets belong to. Only networks that are in the distributed mode can have subnetworks.
 
-- [**`subnets`**](#var-subnets): *(**Required** `list(subnets)`)*<a name="var-subnets"></a>
+- [**`subnets`**](#var-subnets): *(**Required** `list(subnet)`)*<a name="var-subnets"></a>
 
   A list of subnets to be created with the VPC.
 
@@ -165,7 +165,7 @@ See [variables.tf] and [examples/] for details and use-cases.
   ]
   ```
 
-  Each `subnets` object in the list accepts the following attributes:
+  Each `subnet` object in the list accepts the following attributes:
 
   - [**`name`**](#attr-subnets-name): *(**Required** `string`)*<a name="attr-subnets-name"></a>
 
@@ -290,11 +290,11 @@ See [variables.tf] and [examples/] for details and use-cases.
 
 The following attributes are exported in the outputs of the module:
 
-- **`module_enabled`**
+- [**`module_enabled`**](#output-module_enabled): *(`bool`)*<a name="output-module_enabled"></a>
 
   Whether this module is enabled.
 
-- **`subnetworks`**
+- [**`subnetworks`**](#output-subnetworks): *(`map(subnetwork)`)*<a name="output-subnetworks"></a>
 
   The created subnet resources.
 

@@ -155,7 +155,7 @@ section {
         }
 
         variable "module_depends_on" {
-          type           = list(dependencies)
+          type           = list(dependency)
           description    = <<-END
             A list of dependencies. Any object can be _assigned_ to this list to define a hidden external dependency.
           END
@@ -188,7 +188,7 @@ section {
 
         variable "subnets" {
           required       = true
-          type           = list(subnets)
+          type           = list(subnet)
           description    = <<-END
             A list of subnets to be created with the VPC.
           END
@@ -379,15 +379,21 @@ section {
     title   = "Module Outputs"
     content = <<-END
       The following attributes are exported in the outputs of the module:
-
-      - **`module_enabled`**
-
-        Whether this module is enabled.
-
-      - **`subnetworks`**
-
-        The created subnet resources.
     END
+
+    output "module_enabled" {
+      type        = bool
+      description = <<-END
+        Whether this module is enabled.
+      END
+    }
+
+    output "subnetworks" {
+      type        = map(subnetwork)
+      description = <<-END
+        The created subnet resources.
+      END
+    }
   }
 
   section {
