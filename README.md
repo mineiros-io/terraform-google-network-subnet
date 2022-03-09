@@ -52,7 +52,7 @@ Most basic usage just setting required arguments:
 
 ```hcl
 module "terraform-google-network-subnet" {
-  source = "github.com/mineiros-io/terraform-google-network-subnet.git?ref=v0.1.0"
+  source = "github.com/mineiros-io/terraform-google-network-subnet.git?ref=v0.0.2"
 
   network = google_compute_network.custom-test.id
   subnets = [
